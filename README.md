@@ -31,10 +31,14 @@ stash recall "that water bill negotiation service" --around 2024-10
 ```
 
 `recall` is fully local semantic search: build with `make build` (statically
-links llama.cpp), and the first use downloads a small GGUF embedding model to
-`~/.stash/models`. Only descriptions, keys, tags, and types are embedded —
-never values. Plain `go build` works too; `recall` then tells you how to get
-the full build.
+links llama.cpp — requires Go, cmake, git, and a C++ toolchain), and the
+first use downloads a small GGUF embedding model to `~/.stash/models`. Only
+descriptions, keys, tags, and types are embedded — never values. Plain
+`go build` needs only Go; `recall` then tells you how to get the full build.
+
+macOS only for now: the master key is anchored in the macOS Keychain
+(headless/Linux custody is a designed-but-deferred decision — see
+`DECISIONS.md`).
 
 Shell completion (`stash completion zsh`) tab-completes resource keys one
 namespace segment at a time, without unlocking the store.
