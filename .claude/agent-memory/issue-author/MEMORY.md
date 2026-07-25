@@ -1,0 +1,1 @@
+- [Verify coordinator claims](feedback_verify_coordinator_claims.md) — re-check files/re-run validators before acting on a mid-task claim of failure; don't trust the claim's premise blindly.
