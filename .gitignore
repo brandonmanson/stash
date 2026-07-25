@@ -1,0 +1,5 @@
+bin/
+*.db
+.env
+.deps/
+.backstop/packs/

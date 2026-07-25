@@ -1,0 +1,8 @@
+project: stash
+language: go
+packs:
+    backstop/go-standards: local
+enforcement:
+    policy:
+        test_verification:
+            level: "off"
