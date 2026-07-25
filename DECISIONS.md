@@ -5,9 +5,13 @@ Source: `backstop-core/bundles/BUNDLE-018-stash-local-resource-store.bundle.md`
 what the MVP *provisionally* adopted so the bundle can resolve or overturn each
 with full context. Decided with the founder on 2026-07-24.
 
+> Bundle/OQ/DD references point into backstop, the (currently private)
+> agent-discipline framework this project's design process ran under. The
+> references are kept as provenance; the decisions below stand on their own.
+
 | OQ | MVP choice | Notes |
 |----|-----------|-------|
-| OQ-1 home/runtime | Own repo (`~/src/projects/stash`), Go | Matches lean. |
+| OQ-1 home/runtime | Own repo (this one), Go | Matches lean. |
 | OQ-2 storage/encryption | SQLite (`modernc.org/sqlite`); per-resource AES-256-GCM with resource key as AAD; keychain-wrapped data key | Matches lean. **Keys, types, tags, metadata are plaintext at rest** (enables ls/search/completion without unlock) — only values are encrypted. Revisit if metadata is deemed sensitive. |
 | OQ-3 key custody | macOS Keychain only (KEK via `/usr/bin/security`); no passphrase fallback, no lock/timeout semantics | Founder call: don't enshrine a weak headless default. Headless/Linux/recovery still open. Known limit: the keychain item is global (`dev.stash`/`kek`) — a second `stash init` with a different `STASH_HOME` overwrites the KEK and bricks the first store. |
 | OQ-4 caller identity | **Moot for MVP** — no daemon, so the caller *is* the user's process | Still the load-bearing OQ for the daemon phase. |
