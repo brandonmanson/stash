@@ -117,6 +117,14 @@ From an honest self-review before open-sourcing:
   secrets tooling; relevant only against memory-dump attackers. Revisit at
   daemon time.
 
+## backstop/cobra-cli pack adopted (2026-07-25)
+
+Second enforcement pack, born from this project's own security review: the
+generalizable findings (secrets-via-argv, echoed input, credential-shaped
+usage text, stdout/stderr discipline, centralized exit codes) became rules
+instead of lore. Its first dogfood run caught a real defect here
+(os.Exit(1) in stashHome(), outside main) — fixed by returning errors.
+
 ## Architecture: conscious, temporary deviation from DD-4
 
 DD-4 says the CLI never touches storage — a thin CLI talks to `stashd` over

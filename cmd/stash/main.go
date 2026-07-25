@@ -17,20 +17,22 @@ import (
 	"stash/internal/vault"
 )
 
-func stashHome() string {
+func stashHome() (string, error) {
 	if h := os.Getenv("STASH_HOME"); h != "" {
-		return h
+		return h, nil
 	}
 	home, err := os.UserHomeDir()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "stash: cannot determine home directory:", err)
-		os.Exit(1)
+		return "", fmt.Errorf("determining home directory: %w", err)
 	}
-	return filepath.Join(home, ".stash")
+	return filepath.Join(home, ".stash"), nil
 }
 
 func openStore() (store.Store, error) {
-	home := stashHome()
+	home, err := stashHome()
+	if err != nil {
+		return nil, fmt.Errorf("locating stash home: %w", err)
+	}
 	if _, err := os.Stat(filepath.Join(home, "keys.json")); err != nil {
 		return nil, fmt.Errorf("stash is not initialized — run `stash init`")
 	}
@@ -38,7 +40,11 @@ func openStore() (store.Store, error) {
 }
 
 func openVault() (*vault.Vault, error) {
-	return vault.Open(stashHome())
+	home, err := stashHome()
+	if err != nil {
+		return nil, fmt.Errorf("locating stash home: %w", err)
+	}
+	return vault.Open(home)
 }
 
 func stdinIsTTY() bool  { return term.IsTerminal(int(os.Stdin.Fd())) }
@@ -100,9 +106,12 @@ func initCmd() *cobra.Command {
 		Short: "Initialize the stash: create the store and anchor the master key in the macOS Keychain",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			home := stashHome()
-			if err := os.MkdirAll(home, 0o700); err != nil {
+			home, err := stashHome()
+			if err != nil {
 				return err
+			}
+			if err := os.MkdirAll(home, 0o700); err != nil {
+				return fmt.Errorf("creating stash home: %w", err)
 			}
 			if err := vault.Init(home); err != nil {
 				return err

@@ -53,7 +53,11 @@ Runs fully locally: the first use downloads a small embedding model to
 				return nil
 			}
 
-			emb, model, err := embed.Open(stashHome())
+			home, err := stashHome()
+			if err != nil {
+				return err
+			}
+			emb, model, err := embed.Open(home)
 			if err != nil {
 				return err
 			}

@@ -1,4 +1,12 @@
 packs:
+    backstop/cobra-cli:
+        content_hash: d45dd4698e3046a728b9009cdeb1626cb3b0e87cdba97ec78a052b453ba4708d
+        git_ref: null
+        install_date: 2026-07-25T16:59:30Z
+        local_path: ../backstop-cobra-cli-pack
+        name: backstop/cobra-cli
+        source_type: local
+        version: null
     backstop/go-standards:
         content_hash: b50cd8ec4492379f027cd5a9911b1a11d657c4962d0c57955c37e239d9f0164d
         git_ref: null

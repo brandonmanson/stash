@@ -1,6 +1,7 @@
 project: stash
 language: go
 packs:
+    backstop/cobra-cli: local
     backstop/go-standards: local
 enforcement:
     policy:
