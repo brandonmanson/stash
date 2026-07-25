@@ -118,6 +118,9 @@ appear. Anything else defaults to note. Override with --type.`,
 
 func readValue(args []string, typ string) ([]byte, error) {
 	if len(args) == 2 {
+		if resource.IsSecret(typ) {
+			fmt.Fprintln(os.Stderr, "warning: secret passed as a command argument is visible in shell history and `ps` — prefer the interactive prompt (omit the value) or stdin (`... | stash put <key>`)")
+		}
 		return []byte(args[1]), nil
 	}
 	if !stdinIsTTY() {

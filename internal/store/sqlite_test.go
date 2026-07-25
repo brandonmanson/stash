@@ -2,6 +2,7 @@ package store
 
 import (
 	"errors"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -16,6 +17,23 @@ func testStore(t *testing.T) Store {
 	}
 	t.Cleanup(func() { st.Close() })
 	return st
+}
+
+func TestStoreFileIsPrivate(t *testing.T) {
+	dir := t.TempDir()
+	dbPath := filepath.Join(dir, "test.db")
+	st, err := OpenSQLite(dbPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer st.Close()
+	info, err := os.Stat(dbPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if perm := info.Mode().Perm(); perm != 0o600 {
+		t.Fatalf("store file must be 0600, got %o", perm)
+	}
 }
 
 func TestReserveFillCycle(t *testing.T) {

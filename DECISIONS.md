@@ -97,6 +97,26 @@ sweep (46 violations → 0):
   Pack-improvement candidates (e.g. exempt consts, entropy heuristics)
   belong in backstop-go-pack, not here.
 
+## Pre-publish security hardening (2026-07-25)
+
+From an honest self-review before open-sourcing:
+
+- **Secrets via argv warn loudly**: `stash put key <value>` leaves the value
+  in shell history and `ps` — the exact leak the tool exists to prevent. A
+  stderr warning now fires for secret types; prompt and stdin are the
+  recommended paths. (Not refused outright: scripts legitimately pass
+  values, and piping is the documented alternative.)
+- **Model downloads are sha256-pinned**: GGUF files are parsed by native
+  code (llama.cpp), so an unverified download is a supply-chain hole. The
+  registry pins a hash per model; mismatches delete the file and refuse.
+- **Store file forced to 0600** (plus WAL sidecars): sqlite creates files
+  with umask defaults (0644); metadata is plaintext by design so the file
+  must not be world-readable. Regression-tested.
+- **Accepted, documented, not fixed**: plaintext values and the data key
+  pass through ordinary GC memory (no zeroing/mlock) — standard for Go
+  secrets tooling; relevant only against memory-dump attackers. Revisit at
+  daemon time.
+
 ## Architecture: conscious, temporary deviation from DD-4
 
 DD-4 says the CLI never touches storage — a thin CLI talks to `stashd` over

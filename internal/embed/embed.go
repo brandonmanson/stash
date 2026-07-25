@@ -29,6 +29,7 @@ type Model struct {
 	Name        string
 	URL         string
 	File        string
+	SHA256      string
 	Dim         int
 	DocPrefix   string
 	QueryPrefix string
@@ -38,10 +39,11 @@ type Model struct {
 func Registry() []Model {
 	return []Model{
 		{
-			Name: "bge-small-en-v1.5",
-			URL:  "https://huggingface.co/CompendiumLabs/bge-small-en-v1.5-gguf/resolve/main/bge-small-en-v1.5-q8_0.gguf",
-			File: "bge-small-en-v1.5-q8_0.gguf",
-			Dim:  384,
+			Name:   "bge-small-en-v1.5",
+			URL:    "https://huggingface.co/CompendiumLabs/bge-small-en-v1.5-gguf/resolve/main/bge-small-en-v1.5-q8_0.gguf",
+			File:   "bge-small-en-v1.5-q8_0.gguf",
+			SHA256: "ec38e8da142596baa913124ae50550de284b6916bf59577ef2f0cb9660c2f514",
+			Dim:    384,
 			// BGE v1.5 recommends an instruction prefix on queries only.
 			QueryPrefix: "Represent this sentence for searching relevant passages: ",
 		},
@@ -49,6 +51,7 @@ func Registry() []Model {
 			Name:        "nomic-embed-text-v1.5",
 			URL:         "https://huggingface.co/nomic-ai/nomic-embed-text-v1.5-GGUF/resolve/main/nomic-embed-text-v1.5.Q8_0.gguf",
 			File:        "nomic-embed-text-v1.5.Q8_0.gguf",
+			SHA256:      "3e24342164b3d94991ba9692fdc0dd08e3fd7362e0aacc396a9a5c54a544c3b7",
 			Dim:         768,
 			DocPrefix:   "search_document: ",
 			QueryPrefix: "search_query: ",
@@ -145,11 +148,18 @@ func EnsureModel(home string, m Model) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("creating model file: %w", err)
 	}
-	n, err := io.Copy(f, resp.Body)
+	// The GGUF is parsed by native code — verify integrity before it is
+	// ever eligible to be loaded.
+	hasher := sha256.New()
+	n, err := io.Copy(f, io.TeeReader(resp.Body, hasher))
 	f.Close()
 	if err != nil {
 		os.Remove(tmp)
 		return "", fmt.Errorf("downloading %s: %w", m.Name, err)
+	}
+	if got := hex.EncodeToString(hasher.Sum(nil)); got != m.SHA256 {
+		os.Remove(tmp)
+		return "", fmt.Errorf("checksum mismatch for %s: got %s, want %s (refusing to use unverified model)", m.Name, got, m.SHA256)
 	}
 	if err := os.Rename(tmp, path); err != nil {
 		return "", fmt.Errorf("finalizing model download: %w", err)

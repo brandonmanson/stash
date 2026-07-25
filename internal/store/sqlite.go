@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math"
+	"os"
 	"strings"
 	"time"
 
@@ -49,6 +50,15 @@ func OpenSQLite(path string) (Store, error) {
 	if _, err := db.Exec(schema); err != nil {
 		db.Close()
 		return nil, fmt.Errorf("initializing store schema: %w", err)
+	}
+	// Metadata (keys, descriptions, tags) is plaintext by design; the store
+	// file must not be world-readable. sqlite creates it with umask defaults,
+	// so tighten it and its WAL sidecars explicitly.
+	for _, sidecar := range []string{path, path + "-wal", path + "-shm"} {
+		if err := os.Chmod(sidecar, 0o600); err != nil && !os.IsNotExist(err) {
+			db.Close()
+			return nil, fmt.Errorf("restricting store permissions: %w", err)
+		}
 	}
 	// Migrations are applied best-effort for stores created before a column
 	// existed; "duplicate column" failures mean the store is already current.
