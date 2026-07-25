@@ -23,7 +23,7 @@ stash rm notes.scratch
 # Reserve structure before you have values — reserved keys are a checklist
 # (`ls --unfilled`), participate in collision rules, and fill via plain put:
 stash reserve acme.resend.credentials.key
-stash reserve bclabs.engagements.acme --like bclabs.engagements.portal  # stamp a shape
+stash reserve agency.engagements.acme --like agency.engagements.oldclient  # stamp a shape
 
 # Descriptions are written for future-you; recall finds them from vibes:
 stash put subs.billshark X --description "renegotiated my municipal water bill"

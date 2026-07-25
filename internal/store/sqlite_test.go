@@ -47,23 +47,23 @@ func TestReserveFillCycle(t *testing.T) {
 
 func TestLazyResolutionDissolvesReservedAncestor(t *testing.T) {
 	st := testStore(t)
-	if _, err := st.Reserve(resource.Resource{Key: "bclabs.engagements.newclient", Type: "note"}); err != nil {
+	if _, err := st.Reserve(resource.Resource{Key: "agency.engagements.newclient", Type: "note"}); err != nil {
 		t.Fatal(err)
 	}
 	dissolved, err := st.Put(resource.Resource{
-		Key: "bclabs.engagements.newclient.vercel.credentials.api_key", Type: "credential", Value: []byte("ct")})
+		Key: "agency.engagements.newclient.vercel.credentials.api_key", Type: "credential", Value: []byte("ct")})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(dissolved) != 1 || dissolved[0] != "bclabs.engagements.newclient" {
-		t.Fatalf("expected dissolved [bclabs.engagements.newclient], got %v", dissolved)
+	if len(dissolved) != 1 || dissolved[0] != "agency.engagements.newclient" {
+		t.Fatalf("expected dissolved [agency.engagements.newclient], got %v", dissolved)
 	}
 	// The reservation row is gone; the deep leaf exists.
 	var nfe *NotFoundError
-	if _, err := st.Get("bclabs.engagements.newclient"); !errors.As(err, &nfe) {
+	if _, err := st.Get("agency.engagements.newclient"); !errors.As(err, &nfe) {
 		t.Fatalf("dissolved reservation should be deleted, got %v", err)
 	}
-	if _, err := st.Get("bclabs.engagements.newclient.vercel.credentials.api_key"); err != nil {
+	if _, err := st.Get("agency.engagements.newclient.vercel.credentials.api_key"); err != nil {
 		t.Fatal(err)
 	}
 	// Reserve-under-reserve also dissolves.

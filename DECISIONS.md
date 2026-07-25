@@ -38,7 +38,7 @@ with full context. Decided with the founder on 2026-07-24.
   `put`/`reserve` UNDER it dissolves it into a namespace (stderr notice).
   Dissolution flows downward only: a coarse `put` never destroys a deeper
   reservation (specific beats coarse), and filled leaves never dissolve.
-  Enables `reserve bclabs.engagements.<client>` as a placeholder that later
+  Enables `reserve agency.engagements.<client>` as a placeholder that later
   deep puts (human or scripted) refine into real structure.
 
 ## Recall / semantic retrieval (founder-decided, 2026-07-25)
@@ -92,6 +92,8 @@ sweep (46 violations → 0):
   *key names* — a secrets store's own vocabulary trips credential/log rules.
   Pack-improvement candidates (e.g. exempt consts, entropy heuristics)
   belong in backstop-go-pack, not here.
+
+## Architecture: conscious, temporary deviation from DD-4
 
 DD-4 says the CLI never touches storage — a thin CLI talks to `stashd` over
 IPC. The MVP deliberately ships **CLI-direct** (founder call, 2026-07-24) to

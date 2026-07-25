@@ -25,7 +25,7 @@ them with a fill hint. Fill one with a normal stash put.
 under the new prefix with the same type and tags. An existing engagement IS
 the template:
 
-  stash reserve bclabs.engagements.acme --like bclabs.engagements.portal
+  stash reserve agency.engagements.acme --like agency.engagements.oldclient
 
 Reserving needs no unlock — there is nothing to encrypt.`,
 		Args:              cobra.ExactArgs(1),
