@@ -13,8 +13,8 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 
-	"stash/internal/store"
-	"stash/internal/vault"
+	"github.com/brandonmanson/stash/internal/store"
+	"github.com/brandonmanson/stash/internal/vault"
 )
 
 func stashHome() (string, error) {

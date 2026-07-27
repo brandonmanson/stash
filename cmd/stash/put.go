@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/term"
 
-	"stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/resource"
 )
 
 func putCmd() *cobra.Command {

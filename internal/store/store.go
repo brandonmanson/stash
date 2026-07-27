@@ -6,7 +6,7 @@ package store
 import (
 	"fmt"
 
-	"stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/resource"
 )
 
 // NotFoundError reports a key with no stored resource.

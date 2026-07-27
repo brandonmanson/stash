@@ -6,7 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/resource"
 )
 
 func lsCmd() *cobra.Command {

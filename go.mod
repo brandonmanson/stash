@@ -1,4 +1,4 @@
-module stash
+module github.com/brandonmanson/stash
 
 go 1.26.5
 

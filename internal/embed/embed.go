@@ -19,7 +19,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/resource"
 )
 
 // Model describes a known GGUF embedding model. Prefixes are model-specific

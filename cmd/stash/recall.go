@@ -10,9 +10,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"stash/internal/embed"
-	"stash/internal/resource"
-	"stash/internal/store"
+	"github.com/brandonmanson/stash/internal/embed"
+	"github.com/brandonmanson/stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/store"
 )
 
 func recallCmd() *cobra.Command {

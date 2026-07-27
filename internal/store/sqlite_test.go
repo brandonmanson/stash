@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/resource"
 )
 
 func testStore(t *testing.T) Store {

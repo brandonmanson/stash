@@ -12,7 +12,7 @@ import (
 
 	_ "modernc.org/sqlite"
 
-	"stash/internal/resource"
+	"github.com/brandonmanson/stash/internal/resource"
 )
 
 const schema = `
