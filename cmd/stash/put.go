@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"os"
@@ -119,7 +120,7 @@ appear. Anything else defaults to note. Override with --type.`,
 func readValue(args []string, typ string) ([]byte, error) {
 	if len(args) == 2 {
 		if resource.IsSecret(typ) {
-			fmt.Fprintln(os.Stderr, "warning: secret passed as a command argument is visible in shell history and `ps` — prefer the interactive prompt (omit the value) or stdin (`... | stash put <key>`)")
+			fmt.Fprintln(os.Stderr, "warning: secret passed as a command argument is visible in shell history and `ps`, and shell metacharacters (; < > & $ etc.) can silently mangle it unless quoted — prefer the interactive prompt (omit the value entirely) or stdin (`... | stash put <key>`)")
 		}
 		return []byte(args[1]), nil
 	}
@@ -134,10 +135,9 @@ func readValue(args []string, typ string) ([]byte, error) {
 		return b, err
 	}
 	fmt.Fprintf(os.Stderr, "value (%s): ", typ)
-	var line string
-	_, err := fmt.Scanln(&line)
-	if err != nil && err.Error() != "unexpected newline" {
-		return nil, err
+	line, err := bufio.NewReader(os.Stdin).ReadString('\n')
+	if err != nil && err != io.EOF {
+		return nil, fmt.Errorf("reading value: %w", err)
 	}
-	return []byte(line), nil
+	return []byte(strings.TrimRight(line, "\r\n")), nil
 }
