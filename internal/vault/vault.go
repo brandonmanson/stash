@@ -19,7 +19,7 @@ import (
 	"path/filepath"
 )
 
-const keysFile = "keys.json" // a filename, not a credential — @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
+const keysFile = "keys.json" // a filename, not a credential — @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
 
 type keysConfig struct {
 	Version        int    `json:"version"`

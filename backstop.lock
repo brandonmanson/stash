@@ -1,17 +1,17 @@
 packs:
-    backstop/cobra-cli:
-        content_hash: c629393853f3955295e70dde49d0caf8e97ec7edc2cdda77747a726241d58d46
-        git_ref: null
-        install_date: 2026-07-25T19:10:31Z
-        local_path: ../backstop-cobra-cli-pack
-        name: backstop/cobra-cli
-        source_type: local
-        version: null
-    backstop/go-standards:
-        content_hash: b50cd8ec4492379f027cd5a9911b1a11d657c4962d0c57955c37e239d9f0164d
-        git_ref: null
-        install_date: 2026-07-25T14:12:51Z
-        local_path: ../backstop-go-pack
-        name: backstop/go-standards
-        source_type: local
-        version: null
+    backstop-ai/cobra-cli-standards:
+        content_hash: d9d87c313022bddff02f640a881784b436c661c1dff511fa038d592850eeca4d
+        git_ref: v0.2.1
+        install_date: 2026-07-28T01:09:56Z
+        name: backstop-ai/cobra-cli-standards
+        source_coordinate: backstop-ai/cobra-cli-standards
+        source_type: git
+        version: 0.2.1
+    backstop-ai/go-standards:
+        content_hash: 0479d29fcab522420697ba40dc83a9ac14e6a8fbb504236199548d4f25b05e28
+        git_ref: v1.2.0
+        install_date: 2026-07-28T01:10:10Z
+        name: backstop-ai/go-standards
+        source_coordinate: backstop-ai/go-standards
+        source_type: git
+        version: 1.2.0

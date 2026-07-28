@@ -76,7 +76,7 @@ Reserving needs no unlock — there is nothing to encrypt.`,
 				return err
 			}
 			printDissolved(dissolved)
-			fmt.Printf("reserved %s (%s) — fill it with `stash put %s`\n", key, typ, key) // key NAMES are non-secret by design — @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
+			fmt.Printf("reserved %s (%s) — fill it with `stash put %s`\n", key, typ, key) // key NAMES are non-secret by design — @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
 			return nil
 		},
 	}

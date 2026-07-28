@@ -1,8 +1,8 @@
 project: stash
 language: go
 packs:
-    backstop/cobra-cli: local
-    backstop/go-standards: local
+    backstop-ai/cobra-cli-standards: 0.2.1
+    backstop-ai/go-standards: 1.2.0
 enforcement:
     policy:
         test_verification:

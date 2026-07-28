@@ -44,8 +44,8 @@ type Entry struct {
 const (
 	TypeCredential = "credential"
 	// These consts are resource TYPE NAMES in a secrets store, not secrets.
-	TypePassword    = "password" // @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
-	TypeToken       = "token"    // @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
+	TypePassword    = "password" // @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
+	TypeToken       = "token"    // @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
 	TypeCertificate = "certificate"
 	TypeNote        = "note"
 	TypeLink        = "link"

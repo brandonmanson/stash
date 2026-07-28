@@ -76,7 +76,7 @@ func printTree(entries []resource.Entry, prefix string) {
 			depth = 1
 		}
 		if rel == "" { // the prefix itself is a leaf
-			fmt.Printf("%s%s\n", indent(depth), leafLabel(segsLast(e.Key), e)) // key NAMES are non-secret by design — @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
+			fmt.Printf("%s%s\n", indent(depth), leafLabel(segsLast(e.Key), e)) // key NAMES are non-secret by design — @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
 			continue
 		}
 		for i := 0; i < len(segs)-1; i++ {

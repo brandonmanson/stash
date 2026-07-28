@@ -11,8 +11,8 @@ import (
 // `security` itself ACL access, so later reads don't prompt.
 // Keychain item COORDINATES (service/account names), not credential values.
 const (
-	keychainService = "dev.stash" // @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
-	keychainAccount = "kek"       // @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
+	keychainService = "dev.stash" // @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
+	keychainAccount = "kek"       // @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-hardcoded-credentials:accepted-risk:2026-10-23
 )
 
 func keychainSet(secret string) error {

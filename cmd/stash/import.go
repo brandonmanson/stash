@@ -57,7 +57,7 @@ The source file is left untouched; delete it yourself once you've verified.`,
 					continue
 				}
 				if dryRun {
-					fmt.Printf("would store %s (%s)\n", key, typ) // resource key NAMES are non-secret by design — @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
+					fmt.Printf("would store %s (%s)\n", key, typ) // resource key NAMES are non-secret by design — @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
 					continue
 				}
 				enc, err := v.Encrypt(key, []byte(p.value))
@@ -72,7 +72,7 @@ The source file is left untouched; delete it yourself once you've verified.`,
 					return fmt.Errorf("storing %s: %w", key, err)
 				}
 				printDissolved(dissolved)
-				fmt.Printf("stored %s (%s)\n", key, typ) // @waiver:backstop/go-standards/backstop.packs.backstop.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
+				fmt.Printf("stored %s (%s)\n", key, typ) // @waiver:backstop-ai/go-standards/backstop.packs.backstop-ai.go-standards.rules.security.go.security.no-sensitive-data-in-logs:accepted-risk:2026-10-23
 			}
 			if !dryRun {
 				fmt.Fprintf(os.Stderr, "\nimported %d resources from %s — the file is untouched; remove it when ready\n", len(pairs), args[0])
